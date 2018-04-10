@@ -3,6 +3,11 @@ package plugin.sample;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
 
+import org.apache.cordova.LOG;
+
+import android.content.Context;
+import android.content.Intent;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,21 +17,17 @@ import org.json.JSONObject;
  */
 public class Sample extends CordovaPlugin {
 
+    private static final String LOG_TAG = "MySamplePlugin";
+
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        if (action.equals("coolMethod")) {
-            String message = args.getString(0);
-            this.coolMethod(message, callbackContext);
-            return true;
-        }
-        return false;
-    }
+        LOG.d(LOG_TAG, "testのログです");
 
-    private void coolMethod(String message, CallbackContext callbackContext) {
-        if (message != null && message.length() > 0) {
-            callbackContext.success(message);
-        } else {
-            callbackContext.error("Expected one non-empty string argument.");
-        }
+        Context context = cordova.getActivity().getApplicationContext();
+        Intent intent = new Intent(context, NewActivity.class);
+        cordova.getActivity().startActivity(intent);
+
+        callbackContext.success("ok");
+        return true;
     }
 }

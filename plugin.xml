@@ -10,8 +10,13 @@
                 <param name="android-package" value="plugin.sample.Sample" />
             </feature>
         </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity android:label="New Activity" android:name="plugin.sample.NewActivity"></activity>
+        </config-file>
         <config-file parent="/*" target="AndroidManifest.xml" />
         <source-file src="src/android/Sample.java" target-dir="src/cordova-plugin-sample/Sample" />
+        <source-file src="src/android/NewActivity.java" target-dir="src/cordova-plugin-sample/Sample" />
+        <source-file src="src/android/res/new_activity.xml" target-dir="res/layout"/>
     </platform>
     <platform name="ios">
         <config-file parent="/*" target="config.xml">
